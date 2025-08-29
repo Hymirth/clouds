@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dohaaifc54kya"
+path="res://.godot/imported/Sketchfab_landscape.obj-a9dab0d71b98bb072f78b70ad332c25d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Sketchfab_landscape.obj-a9dab0d71b98bb072f78b70ad332c25d.mesh"]
+
+source_file="res://assets/Sketchfab_landscape.obj"
+dest_files=["res://.godot/imported/Sketchfab_landscape.obj-a9dab0d71b98bb072f78b70ad332c25d.mesh", "res://.godot/imported/Sketchfab_landscape.obj-a9dab0d71b98bb072f78b70ad332c25d.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

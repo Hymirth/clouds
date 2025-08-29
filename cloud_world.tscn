@@ -1,0 +1,116 @@
+[gd_scene load_steps=17 format=3 uid="uid://cavbqamr82gdw"]
+
+[ext_resource type="Script" uid="uid://c6ur2wytwdp8f" path="res://Classes/cloud_world.gd" id="1_seg58"]
+[ext_resource type="Script" uid="uid://0nyqkuel3mj5" path="res://Classes/cloud_compositor.gd" id="2_bp6u7"]
+[ext_resource type="ArrayMesh" uid="uid://wpxbfvf7b05o" path="res://assets/Untitled.obj" id="3_dxrpw"]
+[ext_resource type="Texture2D" uid="uid://lshdhsm63p1w" path="res://assets/cessnaPixel.png" id="4_aro8p"]
+[ext_resource type="ArrayMesh" uid="uid://bnq54pj0hv858" path="res://assets/cessna3.obj" id="5_cngu7"]
+[ext_resource type="ArrayMesh" uid="uid://dohaaifc54kya" path="res://assets/Sketchfab_landscape.obj" id="6_cngu7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bp6u7"]
+
+[sub_resource type="Sky" id="Sky_dxrpw"]
+sky_material = SubResource("ProceduralSkyMaterial_bp6u7")
+
+[sub_resource type="Environment" id="Environment_bp6u7"]
+background_mode = 2
+sky = SubResource("Sky_dxrpw")
+glow_strength = 2.0
+glow_bloom = 1.0
+fog_mode = 1
+fog_light_energy = 1.1
+fog_density = 1.0
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_bp6u7"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("2_bp6u7")
+cloud_scale = 10000.0
+erosion_scale = 1351.0
+loop_time = 100.0
+main_points = 100.0
+optical_depth_points = 10.0
+optical_depth_step_exponent = 0.7
+optical_depth_erosion_coefficient = 0.5
+optical_depth_look_distance = 100.0
+max_step_coeff = 25.0
+erosion_exponent = 2.0
+cloud_density = 0.25
+uniform_coverage = 0.0
+perlin_worley_blend_exponent = 0.2
+top_shape_scale = 4.5
+bottom_shape_scale = 5.5
+peak = 0.15
+cloud_absp = Vector3(0.01, 0.01, 0.01)
+cloud_scat = Vector3(1, 1, 1)
+forward_scatter = 0.85
+sheer_direction = Vector3(1, 0, 0)
+sheer_speed = 4.0
+
+[sub_resource type="Compositor" id="Compositor_dxrpw"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_bp6u7")])
+
+[sub_resource type="Shader" id="Shader_cngu7"]
+code = "
+	shader_type canvas_item;
+
+	uniform sampler3D worley_tex;
+	uniform float slice = 0.1;
+	uniform float time = 0.0;
+
+	void fragment() {
+		vec3 uvw = vec3(UV, fract(slice + time));
+		vec2 v = texture(worley_tex, uvw).rg;
+		COLOR = vec4(v, 1.0, 1.0);
+	}
+	"
+
+[sub_resource type="Texture3DRD" id="Texture3DRD_dekh1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dfg13"]
+shader = SubResource("Shader_cngu7")
+shader_parameter/worley_tex = SubResource("Texture3DRD_dekh1")
+shader_parameter/slice = 0.1
+shader_parameter/time = 8612.12
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_qs5ml"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yw4ne"]
+albedo_texture = ExtResource("4_aro8p")
+
+[node name="cloud_world" type="Node3D"]
+script = ExtResource("1_seg58")
+world_environment_path = NodePath("WorldEnvironment")
+texture_rect_path = NodePath("TextureRect")
+metadata/_custom_type_script = "uid://c6ur2wytwdp8f"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bp6u7")
+compositor = SubResource("Compositor_dxrpw")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_dfg13")
+offset_right = 298.0
+offset_bottom = 304.0
+texture = SubResource("Texture2DRD_qs5ml")
+
+[node name="Untitled" type="MeshInstance3D" parent="."]
+transform = Transform3D(-93.4718, 20.6171, -29.6079, 2.72542e-06, 82.2227, 57.2548, 36.079, 53.4139, -76.7068, 206.558, -101.139, 184.327)
+visible = false
+mesh = ExtResource("3_dxrpw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.853553, 0.146447, 0.5, -0.5, 0.5, 0.707106, -0.146447, -0.853553, 0.5, -8.79707, 266.57, -30.3325)
+
+[node name="Cessna3" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.67936, -3.50689, 6.56414, 0.508477, 9.01461, 4.29865, -7.4248, -2.53745, 6.19949, 264.076, 489.917, 231.051)
+material_override = SubResource("StandardMaterial3D_yw4ne")
+mesh = ExtResource("5_cngu7")
+
+[node name="SketchfabLandscape" type="MeshInstance3D" parent="."]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, -523.043, 0)
+mesh = ExtResource("6_cngu7")

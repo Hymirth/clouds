@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://ldi5ytktovcd"
+path="res://.godot/imported/erosion_noise.glsl-10162b39754166d92b377b8d980a563a.res"
+
+[deps]
+
+source_file="res://shaders/erosion_noise.glsl"
+dest_files=["res://.godot/imported/erosion_noise.glsl-10162b39754166d92b377b8d980a563a.res"]
+
+[params]
+

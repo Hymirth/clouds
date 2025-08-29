@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://bgycqhf06wsd5"
+path="res://.godot/imported/perlin_noise.glsl-7da123d79c3a70936a96dfceda63e164.res"
+
+[deps]
+
+source_file="res://shaders/perlin_noise.glsl"
+dest_files=["res://.godot/imported/perlin_noise.glsl-7da123d79c3a70936a96dfceda63e164.res"]
+
+[params]
+

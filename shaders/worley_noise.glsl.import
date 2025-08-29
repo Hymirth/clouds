@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://c7w8ty127tfjg"
+path="res://.godot/imported/worley_noise.glsl-e4f826b9acbe9a6aced73a0ba804db81.res"
+
+[deps]
+
+source_file="res://shaders/worley_noise.glsl"
+dest_files=["res://.godot/imported/worley_noise.glsl-e4f826b9acbe9a6aced73a0ba804db81.res"]
+
+[params]
+
